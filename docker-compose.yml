@@ -1,0 +1,14 @@
+version: "3.8"
+services:
+  server_sreality:
+    build: ./app
+    ports:
+      - 8080:8080
+    depends_on:
+      - db_sreality
+  db_sreality:
+    build: ./database/
+    volumes:
+      - ./postgres_data:/var/lib/postgresql/data/
+    expose:
+      - 5432
