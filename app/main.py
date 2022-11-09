@@ -4,8 +4,13 @@ from fastapi.responses import HTMLResponse
 from scrapy.crawler import CrawlerProcess
 from srealityspider import SrealitySpider
 from flat_post_repository import FlatPostRepository
+from dotenv import load_dotenv
+
+load_dotenv()
 
 app = FastAPI()
+
+
 repository = FlatPostRepository()
     
 
@@ -22,6 +27,7 @@ async def root():
 
 
 def main():
+    
     
     count = repository.get_count().first()[0]
     

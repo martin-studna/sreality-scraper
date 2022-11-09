@@ -1,12 +1,13 @@
 from sqlalchemy import create_engine
+import os
 
 class FlatPostRepository:
     def __init__(self) -> None:
-        db_name = 'sreality'
-        db_user = 'admin'
-        db_pass = 'password123'
-        db_host = 'db_sreality'
-        db_port = '5432'
+        db_name = os.getenv("POSTGRES_DB")
+        db_user = os.getenv("POSTGRES_USER")
+        db_pass = os.getenv("POSTGRES_PASSWORD")
+        db_host = os.getenv("POSTGRES_DB_HOST")
+        db_port = os.getenv("POSTGRES_DB_HOST")
 
         # Connecto to the database
         db_string = 'postgresql://{}:{}@{}:{}/{}'.format(

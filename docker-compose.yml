@@ -4,6 +4,8 @@ services:
     build: ./app
     ports:
       - 8080:8080
+    env_file:
+      - ./.env
     depends_on:
       db_sreality:
         condition: service_healthy
@@ -11,7 +13,9 @@ services:
     build: ./database/
     volumes:
       - ./postgres_data:/var/lib/postgresql/data/
+    env_file:
+      - ./.env
     expose:
       - 5432
     healthcheck:
-        test: [ "CMD-SHELL", "pg_isready -d sreality -U admin" ]
+        test: [ "CMD-SHELL", "pg_isready -d ${POSTGRES_DB} -U ${POSTGRES_USER}" ]
