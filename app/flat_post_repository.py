@@ -7,7 +7,7 @@ class FlatPostRepository:
         db_user = os.getenv("POSTGRES_USER")
         db_pass = os.getenv("POSTGRES_PASSWORD")
         db_host = os.getenv("POSTGRES_DB_HOST")
-        db_port = os.getenv("POSTGRES_DB_HOST")
+        db_port = os.getenv("POSTGRES_DB_PORT")
 
         # Connecto to the database
         db_string = 'postgresql://{}:{}@{}:{}/{}'.format(
@@ -15,10 +15,7 @@ class FlatPostRepository:
         self.db = create_engine(db_string)
         
     def add_new_post(self, title, imageSrc):
-        self.db.execute("INSERT INTO flatposts (title,imageurl) " +
-                "VALUES (\'" +
-                str(title) + "\',\'" +
-                str(imageSrc) + "\');")
+        self.db.execute("INSERT INTO flatposts VALUES (%s, %s)", (str(title), str(imageSrc)))
         
     def get_count(self):
         query = "" + \
