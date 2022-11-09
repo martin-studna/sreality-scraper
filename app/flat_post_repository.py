@@ -30,12 +30,7 @@ class FlatPostRepository:
         
         results = []
         
-        query = "" + \
-            "SELECT * " + \
-            "FROM flatposts " + \
-            f"LIMIT {num}"
-
-        result_set = self.db.execute(query)
+        result_set = self.db.execute("SELECT * FROM flatposts LIMIT %s", (num, ))
         for r in result_set:
             results.append(r)
             
